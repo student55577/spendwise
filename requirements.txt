@@ -1,0 +1,6 @@
+fastapi[all]
+uvicorn[standard]
+tinydb
+python-jose
+passlib
+python-dateutil
