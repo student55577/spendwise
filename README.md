@@ -28,6 +28,6 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 # Go to moneymanagement folder start front end react js
 run once while setting
-`npm install`
+`npm install --legacy-peer-deps` 
 after that just start
 `npm start`
