@@ -11,13 +11,21 @@ import { useTheme } from '@mui/material/styles';
 export default function ResponsiveDialog({ createTransaction}) {
     console.log('hi....')
   const [open, setOpen] = React.useState(false);
+  const [msg, setMsg] = React.useState(false);
+  const [titlemsg, setTitlemsg] = React.useState(false);
+  const [dialogType, setDialogType] = React.useState('dialog');
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
   
 
 
   const handleClickOpen = () => {
-    setOpen(createTransaction());
+    let data = createTransaction()
+    console.log("data----------------", data)
+    setOpen(data["open_dialog"]);
+    setTitlemsg(data["titlemsg"]);
+    setMsg(data["msg"]);
+    setDialogType(data["dialog_type"])
     return 
   };
 
@@ -28,6 +36,30 @@ export default function ResponsiveDialog({ createTransaction}) {
     setOpen(false);
     createTransaction(true)
   };
+
+  function HandledialogType({dialogType}) {
+    console.log("dialogType", dialogType)
+    if (dialogType === 'dialog') {
+
+      return <>
+        <Button autoFocus onClick={handleClose}>
+          Dont Proceed
+        </Button>
+        <Button onClick={SaveExpense} autoFocus>
+        Proceed
+        </Button>
+      </>
+    }
+    else {
+      return <>
+        <Button autoFocus onClick={handleClose}>
+          Ok
+        </Button>
+
+      </>
+    }
+    
+  }
   return (
     <Grid container>
         <Divider/>
@@ -41,20 +73,15 @@ export default function ResponsiveDialog({ createTransaction}) {
         aria-labelledby="responsive-dialog-title"
       >
         <DialogTitle id="responsive-dialog-title">
-          {"Seems like impulsive buying ?"}
+          {titlemsg}
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
-            This is to notify you that it is an impulsive buying as per your configuration.
+            {msg}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose}>
-            Dont Proceed
-          </Button>
-          <Button onClick={SaveExpense} autoFocus>
-            Proceed
-          </Button>
+          <HandledialogType dialogType={dialogType}/>
         </DialogActions>
       </Dialog>
     </Grid>

@@ -74,7 +74,7 @@ function Main() {
         <Typography align="center" variant="h5">Total Balance £{balance} </Typography>
           {/* <Typography variant="subtitle1" style={{ lineHeight: '1.5em', marginTop: '20px' }}><InfoCard /></Typography> */}
         <Divider sx={{margin: '20px 0'}} />
-        <ExpenseForm addTransaction= {addTransaction}/>
+        <ExpenseForm addTransaction= {addTransaction} balance={balance}/>
       </CardContent>
       <CardContent sx ={{paddingTop: 0}}>
         <Grid container spacing={2}>
