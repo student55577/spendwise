@@ -225,7 +225,7 @@ incomeCategories = [
 
 expenseCategories = [
   { "type": 'Bills', "subCategory": "Needs", "amount": 0, "color": expenseColors[0] },
-  { "type": 'Loan', "subCategory": "Needs", "amount": 0, "color": expenseColors[1] },
+  { "type": 'Loan Repayment', "subCategory": "Needs", "amount": 0, "color": expenseColors[1] },
   { "type": 'House', "subCategory": "Needs", "amount": 0, "color": expenseColors[2] },
   { "type": 'Clothes', "subCategory": "Needs", "amount": 0, "color": expenseColors[3] },
   { "type": 'Food', "subCategory": "Needs", "amount": 0, "color": expenseColors[4] },

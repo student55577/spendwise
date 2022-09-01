@@ -3,15 +3,14 @@ import { useState, useEffect} from 'react';
 import { Grid,  FormControl, InputLabel, Select, MenuItem, TextField, Divider  } from '@mui/material'
 import { v4 as uuidv4 } from 'uuid';
 import formatDate from '../utils/formatDate';
-import {useNavigate} from "react-router-dom"
 import ResponsiveDialog from './ResponsiveDialog';
-function ExpenseForm({addTransaction}) {
+function ExpenseForm({addTransaction, balance}) {
 
   const [incomeCategoriesData, setIncomeCategoriesData] = useState([]);
   const [expenseCategoriesData, setExpenseCategoriesData] = useState([]);
   const [savingCategoriesData, setSavingCategoriesData] = useState([]);
   const [token, setToken] = useState(localStorage.getItem("token"))
-  let navigate = useNavigate() 
+
   useEffect(()=>{
     fetchIncomeCategories()
     fetchExpenseCategories()
@@ -59,7 +58,6 @@ function ExpenseForm({addTransaction}) {
     const data = await response.json();
     console.log(data);
     setExpenseCategoriesData(data)
-    console.log(expenseCategoriesData)
   }
   };
 
@@ -80,7 +78,6 @@ function ExpenseForm({addTransaction}) {
         const data = await response.json();
         console.log(data);
         setSavingCategoriesData(data)
-        console.log(savingCategoriesData)
     }
     };
 
@@ -88,12 +85,22 @@ function ExpenseForm({addTransaction}) {
     console.log("ignoreExpenseValidation", ignoreExpenseValidation)
     let open_dialog = false;
     const impulseBuying = 10000
-
-    if (Number.isNaN(Number(formData.amount)) || formData.amount <=0 ||  formData.category === "" || !formData.date.includes('-')) return false;
-    if (ignoreExpenseValidation != true) {
+    if ((formData.type === 'Expense' || formData.type === 'Saving') && formData.amount > balance) {
+        open_dialog = true
+        return {
+          "open_dialog":open_dialog, "msg": "Your balance is low to spend here.",
+          "titlemsg": "Seems like dont have balance to buy !",
+          "dialog_type": "alert"
+        }
+    }
+    if (Number.isNaN(Number(formData.amount)) || formData.amount <= 0 ||  formData.category === "" || !formData.date.includes('-')) return false;
+    if (ignoreExpenseValidation !== true) {
       if ( (formData.type === 'Expense' && formData.amount > impulseBuying) ) {
         open_dialog = true
-        return open_dialog
+        return {
+          "open_dialog":open_dialog, "msg": "This is to notify you that it is an impulsive buying as per your configuration.",
+          "titlemsg": "Seems like impulsive buying ?", "dialog_type": "dialog"
+        }
       }
     }
     if (incomeCategoriesData.map((iC) => iC.type).includes(formData.category)) {
@@ -106,7 +113,11 @@ function ExpenseForm({addTransaction}) {
     }
     addTransaction({ ...formData, amount: Number(formData.amount), id: uuidv4() });
     setFormData(initialState);
-    return false
+    open_dialog = false
+    return {
+      "open_dialog":open_dialog, "msg": "",
+      "titlemsg": ""
+    }
   };
 
 const initialState = {

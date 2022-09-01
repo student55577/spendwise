@@ -17,7 +17,7 @@ export default function SimpleContainer() {
           </div>
           <div>
               <iframe width="100%" align="center" height="400px"
-                src="https://www.youtube.com/embed/xEPHsUtLFDA"
+                src="https://www.youtube.com/embed/k0JVAgczgWA"
                 frameborder="0"
                 allow="autoplay; encrypted-media"
                 allowfullscreen
