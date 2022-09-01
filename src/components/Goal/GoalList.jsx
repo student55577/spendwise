@@ -42,7 +42,7 @@ function GoalList({transactionData, deleteTheGoal, balance}) {
             <ListItemText 
             sx={{color:transaction.targetReached===true?'green':'blue'}} 
             primary={`Goal: ${transaction.goal} in ${transaction.duration} Months `} 
-            secondary={`Target Amount: $${transaction.amount} Saved: $${transaction.savedTillNow} Target Date:${transaction.date}`}  />
+            secondary={`Target Amount: £${transaction.amount} Saved: £${transaction.savedTillNow} Target Date:${transaction.date}`}  />
             <ListItemSecondaryAction>
               <IconButton edge="end" aria-label="delete" onClick={() => deleteTheGoal(transaction.id)}>
                 <Delete />
