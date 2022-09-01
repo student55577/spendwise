@@ -88,7 +88,7 @@ function ExpenseForm({addTransaction, balance}) {
     if ((formData.type === 'Expense' || formData.type === 'Saving') && formData.amount > balance) {
         open_dialog = true
         return {
-          "open_dialog":open_dialog, "msg": "You cannot do this savings due to Insufficient Funds",
+          "open_dialog":open_dialog, "msg": "You cannot do this action due to Insufficient Funds",
           "titlemsg": "Sorry",
           "dialog_type": "alert"
         }
