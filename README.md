@@ -41,5 +41,12 @@
 # Alternatively, You can also refer to the application hosted at:
 `http://34.223.205.136:3000/home`
 
+# References:
+https://fastapi.tiangolo.com/
+https://mui.com/
+reactjs.com
+https://www.highcharts.com/
+https://www.npmjs.com/package/chart.js/v/2.7.3
+
 
 
