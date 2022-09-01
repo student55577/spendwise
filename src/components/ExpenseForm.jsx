@@ -85,7 +85,7 @@ function ExpenseForm({addTransaction, balance}) {
     console.log("ignoreExpenseValidation", ignoreExpenseValidation)
     let open_dialog = false;
     const impulseBuying = 10000
-    if ((formData.type === 'Saving') && formData.amount > balance) {
+    if ((formData.type === 'Expense' || formData.type === 'Saving') && formData.amount > balance) {
         open_dialog = true
         return {
           "open_dialog":open_dialog, "msg": "You cannot do this savings due to Insufficient Funds",
