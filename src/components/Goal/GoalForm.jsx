@@ -3,7 +3,7 @@ import { Grid, Card, CardHeader, CardContent, Button, FormControl, InputLabel, S
 import { v4 as uuidv4 } from 'uuid';
 import formatDate from '../../utils/formatDate';
 import { useState, useEffect } from 'react';
-// import { Label, PaddingOutlined } from '@mui/icons-material';
+
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputAdornment from '@mui/material/InputAdornment';
 import Slider from '@mui/material/Slider';
@@ -59,7 +59,7 @@ function GoalForm() {
             label: '10',
           },
       ];
-    // const {  } = useContext(ExpenseContext);
+
     const initialState = {
       goal: '',
       amount: '',
@@ -110,12 +110,6 @@ function GoalForm() {
     const createGoal = () => {
       console.log(formData)
       if (Number.isNaN(Number(formData.amount)) || !formData.date.includes('-')) return;
-      // console.log("formData.category", formData.category)
-      
-  
-      // // setOpen(true);
-      // addTransaction({ ...formData, amount: Number(formData.amount), id: uuidv4() });
-      // setFormData(initialState);
       addGoal({ ...formData, amount: Number(formData.amount), goal: Number(formData.goal), duration: Number(formData.duration), 
 
         id: uuidv4() })
@@ -154,12 +148,10 @@ function GoalForm() {
     return res;
   }
   };
-  // console.log("transactionData", {transactionData.reduce((previousValue, currentValue)=>{previousValue + currentValue}, 0)})
+
   const totalGoals = Object.keys(transactionData).length
 
-  // useEffect(() => {
-  //   setFormData(formData)
-  // }, [formData])
+
   useEffect(() => {
     getGoals()
   }, [])
