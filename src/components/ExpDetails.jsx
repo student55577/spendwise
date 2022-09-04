@@ -4,9 +4,9 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { useState, useEffect } from 'react';
 import { Doughnut } from 'react-chartjs-2';
 
-// import ExpenseContext from '../context/ExpenseContext';
+// import ExpContext from '../context/ExpContext';
 ChartJS.register(ArcElement, Tooltip, Legend);
-const ExpenseDetails = ({ title }) => {
+const ExpDetails = ({ title }) => {
 
   const initialchartData = {
     datasets: [
@@ -34,7 +34,6 @@ const ExpenseDetails = ({ title }) => {
       const data = await response.json();
       console.log("========= fetchExpenseChartData", data);
       setExpenseChartData(data["chartData"])
-      // setTransactionsData(data["transactions"])
       setTotalExpenseData(data["total"])
       }
     }
@@ -53,4 +52,4 @@ const ExpenseDetails = ({ title }) => {
   );
 };
 
-export default ExpenseDetails;
+export default ExpDetails;

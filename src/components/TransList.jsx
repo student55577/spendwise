@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { List as MUIList, ListItem, ListItemAvatar, Avatar, ListItemText, ListItemSecondaryAction, IconButton, Slide } from '@mui/material';
-import ExpenseContext from '../context/ExpenseContext'
-import { useContext, useEffect } from 'react';
+
+import { useEffect } from 'react';
 import {Delete} from '@mui/icons-material'
 import CurrencyPoundIcon from '@mui/icons-material/CurrencyPound';
 
@@ -27,7 +27,7 @@ function MoneyAvatar({obj}) {
 
 }
 
-function ExpenseList({transactions, deleteTransaction}) {
+function TransList({transactions, deleteTransaction}) {
     const [transactionsData, setTransactionsData] = useState(transactions)
     const [token, setToken] = useState(localStorage.getItem("token"))
 
@@ -56,7 +56,7 @@ function ExpenseList({transactions, deleteTransaction}) {
         setTransactionsData(data)
       }
     }
-    console.log("ExpenseList",transactions, transactionsData);
+    console.log("TransList",transactions, transactionsData);
     return (
     <MUIList dense = {false} sx={{overflow:'auto', maxHeight: '150px'}}>
       {transactionsData.map((transaction) => (
@@ -83,4 +83,4 @@ function ExpenseList({transactions, deleteTransaction}) {
   )
 }
 
-export default ExpenseList
+export default TransList

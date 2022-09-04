@@ -1,7 +1,8 @@
 import React from 'react'
 import { Grid, Card, CardHeader, CardContent, Button, FormControl, InputLabel, Select, MenuItem, TextField, Divider, Typography  } from '@mui/material'
 import { v4 as uuidv4 } from 'uuid';
-import formatDate from '../../utils/formatDate';
+import ExpContext from '../../context/ExpContext';
+
 import { useState, useEffect } from 'react';
 
 import OutlinedInput from '@mui/material/OutlinedInput';
@@ -12,6 +13,7 @@ import axios from 'axios';
 import GoalList from './GoalList';
 
 function GoalForm() {
+    const {formatTheDate} = React.useContext(ExpContext)
     function valuetext(value) {
         return `${value}`;
       }
@@ -60,14 +62,14 @@ function GoalForm() {
           },
       ];
 
-    const initialState = {
+    const initialData = {
       goal: '',
       amount: '',
       duration: '3',
       inflation: 0,
-      date: formatDate(new Date()),
+      date: formatTheDate(new Date()),
     };
-    const [formData, setFormData] = useState(initialState);
+    const [formData, setFormData] = useState(initialData);
     const token = useState(localStorage.getItem("token"));
     const [transactionData, setTransactionData] = useState([]);
     const [totalgoals, setTotalGoals] = useState(0);
@@ -116,7 +118,6 @@ function GoalForm() {
       
     };
   
-  //  alert({transactionData})
   const getGoals = async () => {
     if(token){
     let res = await axios({

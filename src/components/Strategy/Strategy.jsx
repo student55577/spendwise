@@ -3,13 +3,13 @@ import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import ExpenseContext from '../../context/ExpenseContext';
+import ExpContext from '../../context/ExpContext';
 function Strategy() {
     const [startegyOneData, setStartegyOneData] = useState({})
     useEffect(()=>{
         fetchStartegyOne()
     }, [])
-    const {token, islogin} = useContext(ExpenseContext)
+    const {token, islogin} = useContext(ExpContext)
 
     const fetchStartegyOne = async(transaction) => {
         console.log("------- islogin", transaction, islogin)
@@ -112,8 +112,5 @@ function Strategy() {
     
       return <StrategyChart/>
 }
-
-
-
 
 export default Strategy;
