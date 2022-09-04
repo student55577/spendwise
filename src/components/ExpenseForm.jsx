@@ -4,6 +4,8 @@ import { Grid,  FormControl, InputLabel, Select, MenuItem, TextField, Divider  }
 import { v4 as uuidv4 } from 'uuid';
 import formatDate from '../utils/formatDate';
 import ResponsiveDialog from './ResponsiveDialog';
+import { Typography } from '@mui/joy';
+import { getValue } from '@testing-library/user-event/dist/utils';
 function ExpenseForm({addTransaction, balance}) {
 
   const [incomeCategoriesData, setIncomeCategoriesData] = useState([]);
@@ -84,22 +86,25 @@ function ExpenseForm({addTransaction, balance}) {
   const createTransaction = (ignoreExpenseValidation=false) => {
     console.log("ignoreExpenseValidation", ignoreExpenseValidation)
     let open_dialog = false;
-    const impulseBuying = 10000
+    const impulseBuying = 120
+    const keepCount = 1
     if ((formData.type === 'Expense' || formData.type === 'Saving') && formData.amount > balance) {
         open_dialog = true
         return {
           "open_dialog":open_dialog, "msg": "You cannot do this action due to Insufficient Funds",
           "titlemsg": "Sorry",
-          "dialog_type": "alert"
+          "dialog_type": "alert",
         }
     }
+    
     if (Number.isNaN(Number(formData.amount)) || formData.amount <= 0 ||  formData.category === "" || !formData.date.includes('-')) return false;
     if (ignoreExpenseValidation !== true) {
-      if ( (formData.type === 'Expense' && formData.amount > impulseBuying) ) {
-        open_dialog = true
+      if ( (formData.type === 'Expense' && formData.category === 'Clothes' || formData.category === 'Groceries' || formData.category === 'OTT Subscriptions' || formData.category === 'Dining Out' || formData.category === 'Entertainment' || formData.category === 'Shopping' || formData.category === 'Other' && formData.amount > impulseBuying)) {
+        open_dialog = true 
         return {
-          "open_dialog":open_dialog, "msg": "This is to notify you that it is an impulsive buying as per your configuration.",
-          "titlemsg": "Seems like impulsive buying ?", "dialog_type": "dialog"
+          "open_dialog":open_dialog,
+          "titlemsg": "Seems like impulsive buying ?", "dialog_type": "dialog", 
+          "msg": "This is to notify you that it is an impulsive buying as per your configuration where your preferred impulsive limit is £120",
         }
       }
     }

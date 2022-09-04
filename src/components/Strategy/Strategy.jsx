@@ -49,13 +49,13 @@ function Strategy() {
                         type: 'column'
                     },
                     title: {
-                        text: 'YOUR RESULTS VS 50-30-20 Rule'
+                        text: '<b><h2>YOUR RESULTS VS 50-30-20 Rule</b></h2></br><b>Needs:</b>Bills, Loan, House, Clothes, Groceries, Transport</color></br><b>Wants:</b>OTT, Vacations, Dining Out, Entertainment, Shopping, Other',                        
                     },
                     xAxis: {
                         categories: [
-                            'Needs(Max : 50%)',
-                            'Wants(Max : 30%)',
-                            'Savings(Min : 20%)'
+                            '<b>Needs(Max : 50%)</b>',
+                            '<b>Wants(Max : 30%)</b>',
+                            '<b>Savings(Min : 20%)</b>'
                         ]
                     },
                     yAxis: [{
@@ -77,7 +77,7 @@ function Strategy() {
                             borderWidth: 0
                         }
                     },
-                    series: [{
+                    series : [{
                         name: 'Limits',
                         color: 'rgba(165,170,217,1)',
                         data: startegyOneData["limits"],
@@ -89,7 +89,7 @@ function Strategy() {
                         data: startegyOneData["actuals"],
                         pointPadding: 0.4,
                         pointPlacement: -0.2
-                    },]
+                    }, ]
                             }
             });
           }

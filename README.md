@@ -1,4 +1,4 @@
-# Spend Wise App
+# SPEND WISE App
 
 ## Python setup (Need Python3.10)
 

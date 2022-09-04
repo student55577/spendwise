@@ -116,7 +116,7 @@ export default function Applayout() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h5" noWrap component="div">
-            Spend Wise
+            <b>SPEND WISE</b>
           </Typography>
         </Toolbar>
       </AppBar>

@@ -1,3 +1,7 @@
+from faulthandler import disable
+from select import select
+from tkinter import DISABLED
+from tkinter.tix import Select
 from turtle import pd
 from unicodedata import category
 from fastapi import FastAPI
@@ -195,13 +199,7 @@ class GoalInfo(BaseModel):
 class GoalID(BaseModel):
     id: str
 
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
 
-@app.get("/api")
-async def read_item():
-    return {"item_id": 1}
 
 
 incomeColors = ['#0e9e3e', '#aba9b0', '#c1cf46', '#5b6c73', '#c2ab74', '#cfb41d', '#8a2149', 
@@ -228,33 +226,29 @@ expenseCategories = [
   { "type": 'Loan Repayment', "subCategory": "Needs", "amount": 0, "color": expenseColors[1] },
   { "type": 'House', "subCategory": "Needs", "amount": 0, "color": expenseColors[2] },
   { "type": 'Clothes', "subCategory": "Needs", "amount": 0, "color": expenseColors[3] },
-  { "type": 'Food', "subCategory": "Needs", "amount": 0, "color": expenseColors[4] },
-  { "type": 'Transport', "subCategory": "Needs", "amount": 0, "color": expenseColors[5] },
-  { "type": 'Car', "subCategory": "Needs", "amount": 0, "color": expenseColors[6] },  
+  { "type": 'Groceries', "subCategory": "Needs", "amount": 0, "color": expenseColors[4] },
+  { "type": 'Transport', "subCategory": "Needs", "amount": 0, "color": expenseColors[5] },  
+  { "type": 'OTT Subscriptions', "subCategory": "Want", "amount": 0, "color": expenseColors[6] },
   { "type": 'Vacation', "subCategory": "Want", "amount": 0, "color": expenseColors[7] },
   { "type": 'Dining Out', "subCategory": "Want", "amount": 0, "color": expenseColors[8] },
   { "type": 'Entertainment', "subCategory": "Want", "amount": 0, "color": expenseColors[9] },
-  { "type": 'Shopping', "subCategory": "Want", "amount": 0, "color": expenseColors[10] },
+  { "type": 'Shopping', "subCategory": "Want", "amount": 0, "color": expenseColors[10] }, 
   { "type": 'Other', "subCategory": "Want", "amount": 0, "color": expenseColors[11] },
 ]
 
-majorCategories = [
-    {"type": 'Need', "amount":0, "color": majorCategoriesColors[0]},
-{"type": 'Want', "amount":0, "color": majorCategoriesColors[1]},
-{"type": 'Investment', "amount":0, "color": majorCategoriesColors[2]},
-]
+
 need_Want_category = {
     'Bills': "Needs",
-    'Loan' : "Needs",
+    'Loan Repayment' : "Needs",
     'House': "Needs",
     'Clothes': "Needs",
-    'Food': "Needs",
+    'Groceries': "Needs",
     'Transport': "Needs",
-    'Car': "Needs",  
+    'OTT Subscriptions': "Want",
     'Vacation': "Want",
     'Dining Out' : "Want",
     'Entertainment': "Want",
-    'Shopping': "Want", 
+    'Shopping': "Want",
     'Other': "Want",
 }
 
@@ -297,9 +291,7 @@ async def reset_transactions():
     transactions = [{ "amount": 500, "category": 'Salary', "type": 'Income', "date": '2022-06-16',
      "id": str(uuid.uuid4()) }, { "amount": 525, "category": 'Investments', "type": 'Income', "date": '2022-06-16',
       "id": str(uuid.uuid4()) }, { "amount": 500, "category": 'Salary', "type": 'Income', "date": '2022-07-10', 
-      "id": str(uuid.uuid4()) }, { "amount": 123, "category": 'Car', "type": 'Expense', "date": '2022-07-16',
-       "id": str(uuid.uuid4()) }, { "amount": 50, "category": 'Pets', "type": 'Expense', "date": '2022-07-10',
-        "id": str(uuid.uuid4()) }, { "amount": 500, "category": 'Travel', "type": 'Expense', "date": '2022-07-10', 
+       "id": str(uuid.uuid4()) }, { "amount": 500, "category": 'Travel', "type": 'Expense', "date": '2022-07-10', 
         "id": str(uuid.uuid4()) }, { "amount": 50, "category": 'Investments', "type": 'Income', "date": '2022-07-07',
          "id": str(uuid.uuid4()) }, { "amount": 500, "category": 'Savings', "type": 'Income', "date": '2022-01-07', 
          "id": str(uuid.uuid4()) }, { "amount": 5, "category": 'Savings', "type": 'Income', "date": '2022-07-07',

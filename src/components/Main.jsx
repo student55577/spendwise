@@ -24,8 +24,7 @@ function Main() {
       const response = await fetch("/api/Transactions", config)
       const data = await response.json();
       setTransactions(data)
-      // fetchIncomeChartData()
-      // fetchExpenseChartData()
+      
     }
   }
   const deleteTransaction = async(id) => {
@@ -67,8 +66,7 @@ function Main() {
     fetchTransactions()
   },[])
   return (
-    <Card variant="outlined">
-      {/* <CardHeader sx={{align: "center"}} title="RECORD YOUR FINANCIAL ACTIVITY HERE" subheader=""/> */}
+    <Card variant="outlined" bgcolor="#ab9f80">
       <CardContent>
       <Typography align="center" variant="h5" bgcolor="#15b9eb"><b>RECORD YOUR FINANCIAL ACTIVITY HERE</b></Typography>
         <Typography align="center" variant="h5">Total Balance £{balance} </Typography>

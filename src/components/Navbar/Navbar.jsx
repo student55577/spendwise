@@ -119,7 +119,7 @@ export default function Navbar() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Spend Wise
+            <b>SPEND WISE</b>
           </Typography>
         </Toolbar>
       </AppBar>
