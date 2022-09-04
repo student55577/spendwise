@@ -26,6 +26,7 @@ from pydantic import BaseModel, ValidationError
 SECRET_KEY = "09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7"
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 600000
+# referencelink oauth implementation is implemented from here https://fastapi.tiangolo.com/advanced/security/oauth2-scopes/
 fake_users_db = {
     "johndoe": {
         "username": "johndoe",
@@ -131,13 +132,7 @@ async def get_current_user(
     user = get_user(fake_users_db, username=token_data.username)
     if user is None:
         raise credentials_exception
-    # for scope in security_scopes.scopes:
-    #     if scope not in token_data.scopes:
-    #         raise HTTPException(
-    #             status_code=status.HTTP_401_UNAUTHORIZED,
-    #             detail="Not enough permissions",
-    #             headers={"WWW-Authenticate": authenticate_value},
-    #         )
+
     return user
 
 

@@ -8,7 +8,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { Divider, Grid } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-export default function ResponsiveDialog({ createTransaction}) {
+export default function ResponsiveDialog({ addData}) {
     console.log('hi....')
   const [open, setOpen] = React.useState(false);
   const [msg, setMsg] = React.useState(false);
@@ -20,7 +20,7 @@ export default function ResponsiveDialog({ createTransaction}) {
 
 
   const handleClickOpen = () => {
-    let data = createTransaction()
+    let data = addData()
     console.log("data----------------", data)
     setOpen(data["open_dialog"]);
     setTitlemsg(data["titlemsg"]);
@@ -34,7 +34,7 @@ export default function ResponsiveDialog({ createTransaction}) {
   };
   const SaveExpense = () => {
     setOpen(false);
-    createTransaction(true)
+    addData(true)
   };
 
   function HandledialogType({dialogType}) {

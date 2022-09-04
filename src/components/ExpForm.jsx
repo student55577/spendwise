@@ -2,22 +2,20 @@ import React from 'react';
 import { useState, useEffect} from 'react';
 import { Grid,  FormControl, InputLabel, Select, MenuItem, TextField, Divider  } from '@mui/material'
 import { v4 as uuidv4 } from 'uuid';
-import formatDate from '../utils/formatDate';
+import ExpContext from '../context/ExpContext';
 import ResponsiveDialog from './ResponsiveDialog';
-import { Typography } from '@mui/joy';
-import { getValue } from '@testing-library/user-event/dist/utils';
-function ExpenseForm({addTransaction, balance}) {
+
+function ExpForm({addTransaction, balance}) {
 
   const [incomeCategoriesData, setIncomeCategoriesData] = useState([]);
   const [expenseCategoriesData, setExpenseCategoriesData] = useState([]);
   const [savingCategoriesData, setSavingCategoriesData] = useState([]);
   const [token, setToken] = useState(localStorage.getItem("token"))
-
+  const {formatTheDate} = React.useContext(ExpContext)
   useEffect(()=>{
     fetchIncomeCategories()
     fetchExpenseCategories()
     fetchSavingCategories()
-
   }, [])
 
   const fetchIncomeCategories = async() => {
@@ -83,11 +81,10 @@ function ExpenseForm({addTransaction, balance}) {
     }
     };
 
-  const createTransaction = (ignoreExpenseValidation=false) => {
+  const addData = (ignoreExpenseValidation=false) => {
     console.log("ignoreExpenseValidation", ignoreExpenseValidation)
     let open_dialog = false;
     const impulseBuying = 120
-    const keepCount = 1
     if ((formData.type === 'Expense' || formData.type === 'Saving') && formData.amount > balance) {
         open_dialog = true
         return {
@@ -97,9 +94,16 @@ function ExpenseForm({addTransaction, balance}) {
         }
     }
     
-    if (Number.isNaN(Number(formData.amount)) || formData.amount <= 0 ||  formData.category === "" || !formData.date.includes('-')) return false;
+    if (Number.isNaN(Number(formData.amount)) ||
+     formData.amount <= 0 || 
+     formData.category === "" || !formData.date.includes('-')) return false;
     if (ignoreExpenseValidation !== true) {
-      if ( (formData.type === 'Expense' && formData.category === 'Clothes' || formData.category === 'Groceries' || formData.category === 'OTT Subscriptions' || formData.category === 'Dining Out' || formData.category === 'Entertainment' || formData.category === 'Shopping' || formData.category === 'Other' && formData.amount > impulseBuying)) {
+      if ( formData.type === 'Expense' && (formData.category === 'Clothes' ||
+       formData.category === 'Groceries' ||
+        formData.category === 'OTT Subscriptions' ||
+         formData.category === 'Dining Out' ||
+          formData.category === 'Entertainment' || formData.category === 'Shopping' ||
+           formData.category === 'Other') && formData.amount > impulseBuying) {
         open_dialog = true 
         return {
           "open_dialog":open_dialog,
@@ -117,7 +121,7 @@ function ExpenseForm({addTransaction, balance}) {
       setFormData({ ...formData, type: 'Saving' });
     }
     addTransaction({ ...formData, amount: Number(formData.amount), id: uuidv4() });
-    setFormData(initialState);
+    setFormData(initialData);
     open_dialog = false
     return {
       "open_dialog":open_dialog, "msg": "",
@@ -125,14 +129,14 @@ function ExpenseForm({addTransaction, balance}) {
     }
   };
 
-const initialState = {
+const initialData = {
   amount: '',
   category: '',
   subcategory: '',
   type: 'Income',
-  date: formatDate(new Date()),
+  date: formatTheDate(new Date()),
 };
-const [formData, setFormData] = useState(initialState);
+const [formData, setFormData] = useState(initialData);
 
 useEffect(() => {
   setFormData(formData)
@@ -164,13 +168,12 @@ const selectedCategories = formData.type === 'Income' ? incomeCategoriesData : f
         <TextField type="number" label="Amount" value={formData.amount} onChange={(e) => setFormData({ ...formData, amount: e.target.value })} fullWidth />
     </Grid>
      <Grid item xs={6}>
-        <TextField fullWidth label="Date" type="date" value={formData.date} onChange={(e) => setFormData({ ...formData, date: formatDate(e.target.value) })} />
+        <TextField fullWidth label="Date" type="date" value={formData.date} onChange={(e) => setFormData({ ...formData, date: formatTheDate(e.target.value) })} />
     </Grid>
     <Divider/>
-    {/* <Button  variant="outlined" color="primary"  fullWidth onClick={createTransaction} >Create</Button> */}
-    <ResponsiveDialog createTransaction={createTransaction} />
+    <ResponsiveDialog addData={addData} />
   </Grid>
   )
 }
 
-export default ExpenseForm
+export default ExpForm

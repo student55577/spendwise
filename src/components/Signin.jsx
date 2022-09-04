@@ -5,38 +5,24 @@ import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useState } from 'react';
-import {useNavigate, useLocation} from "react-router-dom"
+import {useNavigate} from "react-router-dom"
 import axios from 'axios';
 import { useEffect } from 'react';
-import ExpenseContext from '../context/ExpenseContext';
+import ExpContext from '../context/ExpContext';
 import { Card } from '@mui/material';
-function Copyright(props) {
-  
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+// referencelink https://github.com/mui/material-ui/tree/v5.10.3/docs/data/material/getting-started/templates/sign-in
 
 const theme = createTheme();
 
 
 export default function SignIn() {
-  const {islogin, setIslogin} = React.useContext(ExpenseContext)
+  const {islogin, setIslogin} = React.useContext(ExpContext)
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [username, setUsername] = useState(localStorage.getItem("username"));
   let navigate = useNavigate()
@@ -47,7 +33,6 @@ export default function SignIn() {
       getusername()
     }
     if(token !== null && username !== undefined) {
-      // navigate('/home')
       navigate('/home')
       setIslogin(true)
     }
@@ -62,8 +47,7 @@ export default function SignIn() {
       .get("/api/users/me/", {headers:{'Authorization': 'Bearer ' + localStorage.getItem("token")}})
       .then((response) => {
         console.log(response);
-        // Cookies.set("token", response.data.access_token);
-        localStorage.setItem("username", response.data.username)
+         localStorage.setItem("username", response.data.username)
         setUsername(response.data.username)
         return response;
       })
@@ -82,21 +66,12 @@ export default function SignIn() {
       username: data.get('username'),
       password: data.get('password'),
     });
-    const data_app = {
-      username: data.get('username'),
-      password: data.get('password'),
-    }
-    // login({
-    //   username: data.get('username'),
-    //   password: data.get('password'),
-    // })
-    // navigate('/home')
+
     const loginapi = async () => {
       let res = await axios
         .post("/api/token", data)
         .then((response) => {
           console.log("response",response);
-          // Cookies.set("token", response.data.access_token);
           localStorage.setItem("token", response.data.access_token)
           setToken(response.data.access_token)
           return response;
@@ -164,22 +139,9 @@ export default function SignIn() {
             >
               Sign In
             </Button>
-            {/* <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid> */}
           </Box>
         </Box>
         </Card>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>
   );

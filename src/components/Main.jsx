@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import { Card, CardContent, Typography,  Divider } from '@mui/material'
 import {Grid} from '@mui/material'
-import ExpenseForm from './ExpenseForm'
-import ExpenseList from './ExpenseList'
+import ExpForm from './ExpForm'
+import TransList from './TransList'
 
 import { useState } from 'react'
 
@@ -72,12 +72,12 @@ function Main() {
         <Typography align="center" variant="h5">Total Balance £{balance} </Typography>
           {/* <Typography variant="subtitle1" style={{ lineHeight: '1.5em', marginTop: '20px' }}><InfoCard /></Typography> */}
         <Divider sx={{margin: '20px 0'}} />
-        <ExpenseForm addTransaction= {addTransaction} balance={balance}/>
+        <ExpForm addTransaction= {addTransaction} balance={balance}/>
       </CardContent>
       <CardContent sx ={{paddingTop: 0}}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <ExpenseList transactions={transactions} deleteTransaction={deleteTransaction}/>
+            <TransList transactions={transactions} deleteTransaction={deleteTransaction}/>
           </Grid>
         </Grid>
       </CardContent>

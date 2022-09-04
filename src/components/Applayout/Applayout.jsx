@@ -51,6 +51,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   ...theme.mixins.toolbar,
 }));
 
+// referencelink : https://mui.com/material-ui/react-app-bar/#responsive-app-bar-with-drawer
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
 })(({ theme, open }) => ({
@@ -154,10 +155,6 @@ export default function Applayout() {
         </List>
 
       </Drawer>
-      {/* <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <DrawerHeader />
-          <Main/>
-      </Box> */}
     </Box>
   );
 }
