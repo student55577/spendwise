@@ -15,9 +15,9 @@ export default function SimpleContainer() {
               Why Budgeting?
             </h2>
           </div>
-          <div>
+            <div>
               <iframe width="100%" align="center" height="400px"
-                src="https://www.youtube.com/embed/k0JVAgczgWA"
+                src="https://www.youtube.com/embed/k0JVAgczgWA"  
                 frameborder="0"
                 allow="autoplay; encrypted-media"
                 allowfullscreen
@@ -29,7 +29,7 @@ export default function SimpleContainer() {
             </div>
             <div>
               <iframe width="100%" align="center" height="400px"
-                src="https://www.youtube.com/embed/dH-8yrzd8yc"
+                src="https://www.youtube.com/embed/dH-8yrzd8yc" 
                 frameborder="0"
                 allow="autoplay; encrypted-media"
                 allowfullscreen
