@@ -13,7 +13,7 @@ from tinydb.operations import delete
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 from typing import List, Union
-
+from collections import defaultdict
 from fastapi import Depends, FastAPI, HTTPException, Security, status
 from fastapi.security import (
     OAuth2PasswordBearer,
@@ -317,7 +317,7 @@ async def chart_data(is_type: str, current_user: User = Depends(get_current_acti
     total = 0
     for i in transactions:
         total += i.get("amount")
-    from collections import defaultdict
+
     cat_wise_amount = defaultdict(int)
     for i in transactions:
         cat_wise_amount[i.get("category")] += i.get("amount")
@@ -405,7 +405,7 @@ def goal_tracker(current_user):
     total_income = sum([i['amount'] for i  in income_data])
     total_expense = sum([i['amount'] for i  in expense_data])
     total_saving = sum([i['amount'] for i  in saving_data])
-    from collections import defaultdict
+
     category_wise_saving_done = defaultdict(int)
     for i  in saving_data:
         category_wise_saving_done[i['category']] += i["amount"]
