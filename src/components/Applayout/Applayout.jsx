@@ -50,8 +50,8 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
 }));
-
-// referencelink : https://mui.com/material-ui/react-app-bar/#responsive-app-bar-with-drawer
+//The materials used are inspired from the below 
+// mui.com. (n.d.). App bar React component - Material UI. [online] Available at: https://mui.com/material-ui/react-app-bar/#responsive-app-bar-with-drawer 
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
 })(({ theme, open }) => ({
@@ -157,4 +157,4 @@ export default function Applayout() {
       </Drawer>
     </Box>
   );
-}
+} //[Accessed 4 Sep. 2022].

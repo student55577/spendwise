@@ -26,8 +26,8 @@ from pydantic import BaseModel, ValidationError
 SECRET_KEY = "09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7"
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 600000
-# referencelink oauth implementation is implemented from here https://fastapi.tiangolo.com/advanced/security/oauth2-scopes/
-fake_users_db = {
+# fastapi.tiangolo.com. (n.d.). OAuth2 scopes - FastAPI. [online] Available at: https://fastapi.tiangolo.com/advanced/security/oauth2-scopes/ [Accessed 4 Sep. 2022].
+fake_users_db = { 
     "johndoe": {
         "username": "johndoe",
         "full_name": "John Doe",
@@ -42,7 +42,7 @@ fake_users_db = {
         "hashed_password": "$2b$12$gSvqqUPvlXP2tfVFaWK1Be7DlH.PKZbv5H8KnzzVgXXbVxpva.pFm",
         "disabled": False,
     },
-}
+}    
 
 class Token(BaseModel):
     access_token: str
@@ -156,7 +156,7 @@ async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(
         expires_delta=access_token_expires,
     )
     return {"access_token": access_token, "token_type": "bearer"}
-
+#(fastapi.tiangolo.com, n.d.)
 
 @app.get("/api/users/me/", response_model=User)
 async def read_users_me(current_user: User = Depends(get_current_active_user)):
