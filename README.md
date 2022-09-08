@@ -45,8 +45,9 @@
 https://fastapi.tiangolo.com/
 https://mui.com/
 reactjs.com
-https://www.highcharts.com/
-https://www.npmjs.com/package/chart.js/v/2.7.3
+https://www.highcharts.com/demo/column-placement (chart idea)
+https://www.npmjs.com/package/chart.js/v/2.7.3 (pie chart is implemented using this framework)
+https://www.npmjs.com/package/highcharts-react-official in Strategy.jsx(code inspired from here)
 
 
 

@@ -16,8 +16,8 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import ExpContext from '../context/ExpContext';
 import { Card } from '@mui/material';
-// referencelink https://github.com/mui/material-ui/tree/v5.10.3/docs/data/material/getting-started/templates/sign-in
-
+//The method handleSubmit() is inspired from the below reference
+// GitHub. (n.d.). material-ui/docs/data/material/getting-started/templates/sign-in at v5.10.3 · mui/material-ui. [online] Available at: https://github.com/mui/material-ui/tree/v5.10.3/docs/data/material/getting-started/templates/sign-in
 const theme = createTheme();
 
 
@@ -65,7 +65,7 @@ export default function SignIn() {
     console.log({
       username: data.get('username'),
       password: data.get('password'),
-    });
+    });  //[Accessed 4 Sep. 2022].
 
     const loginapi = async () => {
       let res = await axios
