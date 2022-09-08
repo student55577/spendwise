@@ -51,7 +51,7 @@ class Token(BaseModel):
 
 class TokenData(BaseModel):
     username: Union[str, None] = None
-    scopes: List[str] = []
+    # scopes: List[str] = []
 
 
 class User(BaseModel):
@@ -69,7 +69,7 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 oauth2_scheme = OAuth2PasswordBearer(
     tokenUrl="/api/token",
-    scopes={"me": "Read information about the current user.", "items": "Read items."},
+    # scopes={"me": "Read information about the current user.", "items": "Read items."},
 )
 
 app = FastAPI()
@@ -137,7 +137,7 @@ async def get_current_user(
 
 
 async def get_current_active_user(
-    current_user: User = Security(get_current_user, scopes=["me"])
+    current_user: User = Security(get_current_user)
 ):
     if current_user.disabled:
         raise HTTPException(status_code=400, detail="Inactive user")
@@ -276,31 +276,31 @@ async def saving_categories(current_user: User = Depends(get_current_active_user
         savingCategories.append({ "type": i.get('goal'), "subCategory": "savings", "amount": 0, "color": saveColors[4] })
     return savingCategories
 
-@app.get("/api/categories/majorCategories")
-async def major_categories(current_user: User = Depends(get_current_active_user)):
-    return majorCategories
+# @app.get("/api/categories/majorCategories")
+# async def major_categories(current_user: User = Depends(get_current_active_user)):
+#     return majorCategories
 
-@app.get("/api/resetTransactions")
-async def reset_transactions():
-    import uuid
-    transactions = [{ "amount": 500, "category": 'Salary', "type": 'Income', "date": '2022-06-16',
-     "id": str(uuid.uuid4()) }, { "amount": 525, "category": 'Investments', "type": 'Income', "date": '2022-06-16',
-      "id": str(uuid.uuid4()) }, { "amount": 500, "category": 'Salary', "type": 'Income', "date": '2022-07-10', 
-       "id": str(uuid.uuid4()) }, { "amount": 500, "category": 'Travel', "type": 'Expense', "date": '2022-07-10', 
-        "id": str(uuid.uuid4()) }, { "amount": 50, "category": 'Investments', "type": 'Income', "date": '2022-07-07',
-         "id": str(uuid.uuid4()) }, { "amount": 500, "category": 'Savings', "type": 'Income', "date": '2022-01-07', 
-         "id": str(uuid.uuid4()) }, { "amount": 5, "category": 'Savings', "type": 'Income', "date": '2022-07-07',
-          "id": str(uuid.uuid4()) },
-          { "amount": 5, "category": 'Other', "type": 'Saving', "date": '2022-07-07',
-          "id": str(uuid.uuid4()) },{ "amount": 500, "category": 'Equities', "type": 'Saving', "date": '2022-07-07',
-          "id": str(uuid.uuid4()) },{ "amount": 500, "category": 'FixedDeposit', "type": 'Saving', "date": '2022-07-07',
-          "id": str(uuid.uuid4()) },
-          ]
+# @app.get("/api/resetTransactions")
+# async def reset_transactions():
+#     import uuid
+#     transactions = [{ "amount": 500, "category": 'Salary', "type": 'Income', "date": '2022-06-16',
+#      "id": str(uuid.uuid4()) }, { "amount": 525, "category": 'Investments', "type": 'Income', "date": '2022-06-16',
+#       "id": str(uuid.uuid4()) }, { "amount": 500, "category": 'Salary', "type": 'Income', "date": '2022-07-10', 
+#        "id": str(uuid.uuid4()) }, { "amount": 500, "category": 'Travel', "type": 'Expense', "date": '2022-07-10', 
+#         "id": str(uuid.uuid4()) }, { "amount": 50, "category": 'Investments', "type": 'Income', "date": '2022-07-07',
+#          "id": str(uuid.uuid4()) }, { "amount": 500, "category": 'Savings', "type": 'Income', "date": '2022-01-07', 
+#          "id": str(uuid.uuid4()) }, { "amount": 5, "category": 'Savings', "type": 'Income', "date": '2022-07-07',
+#           "id": str(uuid.uuid4()) },
+#           { "amount": 5, "category": 'Other', "type": 'Saving', "date": '2022-07-07',
+#           "id": str(uuid.uuid4()) },{ "amount": 500, "category": 'Equities', "type": 'Saving', "date": '2022-07-07',
+#           "id": str(uuid.uuid4()) },{ "amount": 500, "category": 'FixedDeposit', "type": 'Saving', "date": '2022-07-07',
+#           "id": str(uuid.uuid4()) },
+#           ]
           
-    db = TinyDB(os.path.join(db_path, 'transactions.json'))
-    db.drop_tables()
-    [db.insert(i) for i in transactions]
-    return transactions
+#     db = TinyDB(os.path.join(db_path, 'transactions.json'))
+#     db.drop_tables()
+#     [db.insert(i) for i in transactions]
+#     return transactions
 
 @app.get("/api/ChartData")
 async def chart_data(is_type: str, current_user: User = Depends(get_current_active_user)):

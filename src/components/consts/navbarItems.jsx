@@ -28,7 +28,7 @@ export const mainNavbarItems = [
     {
         id: 3,
         icon: <BarChartIcon />,
-        label: '50-30-20 Results',
+        label: 'Distribution Tracker',
         route: 'strategy',
     },
     {
