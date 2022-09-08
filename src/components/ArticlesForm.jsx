@@ -29,7 +29,7 @@ export default function SimpleContainer() {
             </div>
             <div>
               <iframe width="100%" align="center" height="400px"
-                src="https://www.youtube.com/embed/8l2egORXGA" // (www.youtube.com, n.d.) Reference: www.youtube.com. (n.d.). 10 things I learned after losing a lot of money | Dorothée Loorbach | TEDxMünster. [online] Available at: https://www.youtube.com/watch?v=_8l2egORXGA&ab_channel=TEDxTalks [Accessed 20 Jul. 2022].
+                src="https://www.youtube.com/embed/_8l2egORXGA" // (www.youtube.com, n.d.) Reference: www.youtube.com. (n.d.). 10 things I learned after losing a lot of money | Dorothée Loorbach | TEDxMünster. [online] Available at: https://www.youtube.com/watch?v=_8l2egORXGA&ab_channel=TEDxTalks [Accessed 20 Jul. 2022].
                 frameborder="0"
                 allow="autoplay; encrypted-media"
                 allowfullscreen
