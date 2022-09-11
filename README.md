@@ -19,6 +19,7 @@
 
 # Go to api directory and start fast api server
 `cd api`
+
 `python main.py`
 
 # OPEN NEW TERMINAL to run front end
